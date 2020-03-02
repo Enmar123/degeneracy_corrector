@@ -1,0 +1,15 @@
+<!--
+tf broadcaster is xyzZYX translation rotation.
+-->
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="1 1 0 0 0 0 map odom 100" />
+  <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="1 1 0 0 0 0 odom base 100" />
+
+<!--  <node pkg="tf" type="static_transform_publisher" name="link3_broadcaster" args="1 -1 0 0 0 0 map odom_degen 100" /> -->
+  <node pkg="tf" type="static_transform_publisher" name="link4_broadcaster" args="-1 3 0 0.753 0 0 odom_degen base_degen 100" />
+  <node pkg="degeneracy_corrector" type="corrector.py" name="degeneracy_corrector" output="screen"/>
+
+  <node pkg="degeneracy_corrector" type="testing_odom_pub1.py" name="odom_pub1" output="screen" />
+  <node pkg="degeneracy_corrector" type="testing_odom_pub2.py" name="odom_pub2" output="screen" />
+
+</launch>
