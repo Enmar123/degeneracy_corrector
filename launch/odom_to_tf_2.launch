@@ -1,0 +1,9 @@
+<!--
+Converts your odom message to a /tf
+-->
+
+<launch>
+  <node name="odom_to_tf_degen" pkg="odom_modifier" type="odom_to_tf" >
+    <param name="odom_topic_in"       value="/degen/odom" />
+  </node>
+</launch>

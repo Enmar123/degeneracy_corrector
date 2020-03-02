@@ -13,13 +13,13 @@ class RosNode:
         msg.child_frame_id = "base"
         msg.pose.pose.position.x = 1
         msg.pose.pose.position.y = 1
-        
+	msg.pose.pose.orientation.w = 1
         
         rate = rospy.Rate(10)
         while not rospy.is_shutdown():
             msg.header.stamp = rospy.Time.now()
             pub_odom.publish(msg)
-            msg.pose.pose.position.x += 0.01
+            msg.pose.pose.position.x += 0.1
             rate.sleep()
 
 
