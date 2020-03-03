@@ -19,7 +19,7 @@ class RosNode:
         while not rospy.is_shutdown():
             msg.header.stamp = rospy.Time.now()
             pub_odom.publish(msg)
-            msg.pose.pose.position.x += 0.1
+            msg.pose.pose.position.x += 0.01
             rate.sleep()
 
 
