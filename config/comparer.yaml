@@ -1,0 +1,13 @@
+### This is the config file for comparative_degeneracy ###
+
+# Accepts an arbitrary number of (nav_msgs/Odometry) inputs but a minimum of 3
+# is nessescary for comparative_degeneracy to function. If there are less than 3
+# then the program cannot decide based on comparisons which of the odometry has
+# problems.
+odom0: example0/odom
+odom1: example1/odom
+odom2: example2/odom
+
+bool0: example0/is_degen
+bool1: example1/is_degen
+bool2: example2/is_degen
