@@ -1,0 +1,5 @@
+<launch>
+  <node name="degen_filter" pkg="degeneracy_corrector" type="filter.py" output="screen" >
+    <rosparam command="load" file="$(find degeneracy_corrector)/config/comparer.yaml" />
+  </node>
+</launch>

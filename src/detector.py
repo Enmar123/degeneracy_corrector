@@ -11,8 +11,8 @@ from std_msgs.msg import Bool
 
 class RosNode:
     def __init__(self):
-        rospy.init_node("comparative_degeneracy_node")
-        rospy.loginfo("Comparative_degeneracy: Initializing")
+        rospy.init_node("DegenDetector")
+        rospy.loginfo("DegenDetector: Initializing")
         
         # Get launch file params
 #        self.map_frame = rospy.get_param("~map_frame")
@@ -32,7 +32,7 @@ class RosNode:
         while not rospy.is_shutdown():
             try:
                 odom_name = rospy.get_param("~odom%d"%(i))
-                bool_name = rospy.get_param("~bool%d"%(i))
+                bool_name = odom_name + "/is_degen"
                 self.odom_subs.append(message_filters.Subscriber(odom_name,
                                                                  Odometry))
                 self.bool_pubs.append(rospy.Publisher(bool_name,
@@ -50,8 +50,8 @@ class RosNode:
         rospy.loginfo("Comparative_Degeneracy: Starting")
         rospy.spin()
         
-    def callback(self, odom0, odom1, odom2):
-        msgs = [odom0, odom1, odom2]
+    def callback(self, *args):
+        msgs = list(args) #list of odometry msgs
         tests = [self.is_targetVelocityAnOutlierInX]
         i = 0
         for msg in msgs:

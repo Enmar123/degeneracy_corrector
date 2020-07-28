@@ -1,20 +1,27 @@
-degeneracy_corrector
+# degeneracy_corrector
 
-This pkg aims to provide a map->odom transform that will correct the positioning of a 
-degenerate odom->base_link transform.
+This pkg aims to detect, filter, and correct degenerate odometry messages.
 
-The node takes in the bool topic /is_degenerate as well as the /odom topic to be corrected 
-and the target /odom.
-Upon recieving true for /is_degenerate the current and target /odom is evaluated. The node
-then creates a /tf topic from map_frame to odom_frame that shifts the degenerate/odom to
-the target/odom relative to the map_frame.
+### Use-Case
+The non-degenerate odometries can be combined to obtain a better localization
+estimate using the robot_localization package.
 
+### I/O
 Topics in
 
-  * /is_degenerate
-  * /odom
-  * /odom 
+  * Bool:     /is_degen
+  * Odometry: /odom
 
 Topics out
 
-  * /tf
+  * Odometry: /odom
+
+### Nodes
+degen_detector
+
+  * Compares the velocities of 3-9 odometry messages and marks outliers as degenerate
+  
+degen_filter
+
+  * Prevents publishing of an odometrty if marked degenerate.
+  * Adds correction factor to odometry preventing drift while degenerate. 
