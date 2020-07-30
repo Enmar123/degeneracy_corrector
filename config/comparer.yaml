@@ -1,7 +1,7 @@
 ### This is the config file for comparative_degeneracy ###
 
 # odom_ref is your most robust odometry estimate, ideally your output from sensor fusion.
-# Degenerate odoms will default pose to this value when they come back online.
+# Degenerate odoms will default their pose to this value when they come back online.
 
 odom_ref: reference/odom
 
@@ -11,3 +11,16 @@ odom_ref: reference/odom
 odom0: example0/odom
 odom1: example1/odom
 odom2: example2/odom
+
+# odom_config controls which velocity components are used for testing degeneracy.
+# Order is [lin_vel_x, lin_vel_y, lin_vel_z,
+#           ang_vel_x, ang_vel_y, ang_vel_z]
+
+odom_config: [true, false, false,
+              false, false, true]
+
+# degen_threshold: Sensor values must differ by degen_threshold*100 % and fall outside the
+# standard deviation (from variance) of the sensor before being considered degenerate.
+# Set to 0 if you want to rely standard deviations only.
+ 
+degen_threshold: 0.25
